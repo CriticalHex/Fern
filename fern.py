@@ -16,6 +16,9 @@ def transform(x,y):
 def offset(n):
     return int((108*n)+1080)
 
+def rc():
+    return random.randint(0,255)
+
 pygame.init()
 
 pygame.display.set_caption("Fern")
@@ -33,7 +36,10 @@ while Running:
     if keys[pygame.K_LCTRL]:
         Running = False
 
+    color = (rc(),rc(),rc())
+    #color = (0,255,0)
+
     x,y = transform(x,y)
-    screen.set_at((offset(x),offset(y)),(0,255,0))
+    screen.set_at((offset(x),offset(y)),color)
 
     pygame.display.flip()
