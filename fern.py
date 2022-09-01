@@ -5,16 +5,15 @@ import random
 def transform(x,y):
     r = random.random()
     if r < 0.01:
-        return 0,  0.16 * y
+        a,b = 0,  0.16 * y
     elif r < 0.89:
-        return 0.85 * x + 0.04 * y, -0.04 * x + 0.85 * y - 1.60
+        a,b = 0.85 * x + 0.04 * y, -0.04 * x + 0.85 * y - 1.60
     elif r < 0.94:
-        return 0.20 * x - 0.26 * y,  0.23 * x + 0.22 * y - 1.60
+        a,b = 0.20 * x - 0.26 * y,  0.23 * x + 0.22 * y - 1.60
     else:
-        return -0.15 * x + 0.28 * y,  0.26 * x + 0.24 * y - 0.44
-
-def offset(n):
-    return int((108*n)+1080)
+        a,b = -0.15 * x + 0.28 * y,  0.26 * x + 0.24 * y - 0.44
+    screen.set_at((int((108*a)+1080),int((108*b)+1080)),color)
+    return a,b
 
 def rc():
     return random.randint(0,255)
@@ -36,11 +35,11 @@ while Running:
     if keys[pygame.K_LCTRL]:
         Running = False
 
-    #color = (rc(),rc(),rc())
-    color = (0,255,0)
+    color = (rc(),rc(),rc())
+    #color = (0,255,0)
 
     for i in range(100000):
         x,y = transform(x,y)
-        screen.set_at((offset(x),offset(y)),color)
+        
 
     pygame.display.flip()
